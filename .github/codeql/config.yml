@@ -7,3 +7,4 @@ queries:
 paths:
   - .github
   - fastlane
+  - .github/workflows
