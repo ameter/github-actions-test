@@ -4,11 +4,10 @@ name: "CodeQL config"
 queries: 
   #- javascript:
     #- uses: security-and-quality
-  #- uses: github/codeql/javascript/ql/src/experimental/Security/CWE-094
+  - uses: github/codeql/javascript/ql/src/experimental/semmle
     # - name: Run custom queries
   - uses: ./.github/codeql/queries/experimental/semmle
 paths:
   - .github
   - .codeql
   - fastlane
-  
