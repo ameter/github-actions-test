@@ -1,0 +1,23 @@
+name: Unstable
+
+on:
+  push:
+    branches:
+      - notReadyToDeploy # will change to main
+
+jobs:
+  unit-tests:
+    permissions:
+      contents: read
+
+    uses: ./.github/workflows/unittest.yml
+
+  fastlane:
+    permissions:
+      contents: write
+
+    needs: unit-tests
+
+    uses: ./.github/workflows/fastlane.yml
+    with:
+      lane: unstable
