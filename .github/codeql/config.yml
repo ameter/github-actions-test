@@ -2,9 +2,9 @@ name: "CodeQL config"
 # packs:
 #   - uses: actions
 queries: 
-  - javascript:
+  #- javascript:
     #- uses: security-and-quality
-    - uses: ./.github/codeql/queries/experimental/Security
+  - uses: ./.github/codeql/queries/experimental/Security
     # - name: Run custom queries
     #   uses: ./.github/codeql/queries
 paths:
