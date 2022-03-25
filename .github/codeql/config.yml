@@ -6,7 +6,7 @@ queries:
     #- uses: security-and-quality
   #- uses: github/codeql/javascript/ql/src/experimental/Security/CWE-094
     # - name: Run custom queries
-  - uses: ./.github/codeql/queries/experimental/semmle
+  - uses: ./.github/codeql/queries/experimental/semmle/javascript
 paths:
   - .github
   - .codeql
