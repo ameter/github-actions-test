@@ -1,6 +1,6 @@
 name: "CodeQL config"
 queries: 
-  javascript:
+  - javascript:
     - uses: security-all
     # - name: Run custom queries
     #   uses: ./.github/codeql/queries
