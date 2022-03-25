@@ -1,6 +1,6 @@
 name: "CodeQL config"
 packs:
-  - uses: Actions
+  - uses: actions
 queries: 
   - javascript:
     - uses: security-and-quality
