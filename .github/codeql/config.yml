@@ -2,7 +2,7 @@ name: "CodeQL config"
 
 queries: 
   #- uses: security-and-quality
-  - uses: github/codeql/javascript/ql/src/experimental/semmle@413c0a8f4f180370afee977d286b68e27bda21e5
+  - uses: github/codeql/javascript/ql/src/experimental@413c0a8f4f180370afee977d286b68e27bda21e5
 
 paths:
   - .github
