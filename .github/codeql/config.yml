@@ -1,7 +1,7 @@
 name: "CodeQL config"
 # packs:
 #   - uses: actions
-queries: 
+packs: 
   #- javascript:
     #- uses: security-and-quality
   #- uses: github/codeql/javascript/ql/src/experimental/Security/CWE-094
