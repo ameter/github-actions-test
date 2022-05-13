@@ -23,7 +23,7 @@ jobs:
           fetch-depth: 0
       
       # - name: Fetch from origin
-      #   run: git fetch origin
+        run: git fetch origin
 
       # - name: Sync 'main'
       #   run: |
