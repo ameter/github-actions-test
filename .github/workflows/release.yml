@@ -22,7 +22,7 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
       
-      # - name: Fetch from origin
+      - name: Fetch from origin
         run: git fetch origin
 
       # - name: Sync 'main'
