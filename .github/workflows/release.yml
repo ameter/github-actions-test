@@ -25,10 +25,10 @@ jobs:
       - name: Fetch from origin
         run: git fetch origin
 
-      - name: Sync 'main'
-        run: |
-          git checkout main
-          git pull --ff-only origin
+      # - name: Sync 'main'
+      #   run: |
+      #     git checkout main
+      #     git pull --ff-only origin
 
       - name: Push main to release branch
         run: git push origin main:ameter/test-release    # will change to release
