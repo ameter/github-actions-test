@@ -1,4 +1,4 @@
-name: Release Amplify iOS 
+name: FULL RELEASE WORKFLOW # Release Amplify iOS 
 
 on:
   workflow_dispatch:
