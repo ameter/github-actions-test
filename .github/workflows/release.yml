@@ -4,7 +4,7 @@ name: Release Amplify iOS
 on:
   push:
     branches: 
-      - chore/gha-release-kickoff # remove this after first run
+      - chore/gha-release-kickoff # remove this after testing
   workflow_dispatch:
 
 permissions:
@@ -21,14 +21,6 @@ jobs:
         with:
           persist-credentials: true
           fetch-depth: 0
-      
-      - name: Fetch from origin
-        run: git fetch origin
-
-      # - name: Sync 'main'
-      #   run: |
-      #     git checkout main
-      #     git pull --ff-only origin
 
       - name: Push main to release branch
-        run: git push origin origin/main:ameter/test-release    # will change to release
+        run: git push origin origin/main:ameter/test-release # will change to release after testing
