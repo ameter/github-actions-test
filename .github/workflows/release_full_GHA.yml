@@ -1,0 +1,21 @@
+name: FULL RELEASE WORKFLOW # Release Amplify iOS 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  unit-tests:
+    permissions:
+      contents: read
+
+    uses: ./.github/workflows/unittest.yml
+
+  fastlane:
+    permissions:
+      contents: write
+
+    needs: unit-tests
+
+    uses: ./.github/workflows/fastlane.yml
+    with:
+      lane: release
