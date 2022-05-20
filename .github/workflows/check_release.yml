@@ -1,5 +1,5 @@
 # Check PRs targeting the release brach to ensure they are from the release GHA workflow.
-name: Check release PR
+name: Check Release PR
 
 on:
   pull_request:
