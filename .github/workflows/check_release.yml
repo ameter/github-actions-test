@@ -44,11 +44,11 @@ jobs:
         shell: bash
         env:
           ACTOR: ${{ github.actor }}
-          EXPECTED: "chore: kickoff release"
-        if: ${{ env.ACTOR != 'blah' }} # change this
+          EXPECTED: "blah"
+        if: ${{ env.ACTOR != env.EXPECTED }}
         run: |
           echo
           echo Invalid actor!
-          echo PRs targeting the release branch must have the actor '?'
+          echo PRs targeting the release branch must have the actor: \'$EXPECTED\'
           echo Current actor: \'$ACTOR\'
           exit 1
