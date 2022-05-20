@@ -21,5 +21,8 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
-      - name: Push main to release branch
-        run: git push origin origin/main:ameter/test-release-clean # will change to release after testing
+      # - name: Push main to release branch
+      #   run: git push origin origin/main:ameter/test-release-clean # will change to release after testing
+
+      - name: Create PR to push main to release branch
+        run: gh pr create --title "chore: kickoff rlease" --body "kickoff release" --head origin/main --base test-release-clean
