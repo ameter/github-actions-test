@@ -23,6 +23,9 @@ jobs:
       # - name: Push main to release branch
       #   run: git push origin origin/main:ameter/test-release-clean # will change to release after testing
 
+      - name: Fetch from origin
+        run: git fetch origin
+
       - name: Create PR to push main to release branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
