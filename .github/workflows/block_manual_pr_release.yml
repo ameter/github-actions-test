@@ -1,0 +1,39 @@
+# Blocks PRs targeting the release branch that are not created by the release GHA workflow.
+name: Block Manual PR to Release
+
+on:
+  pull_request:
+    branches:
+      - ameter/test-release-clean  # will change to release after testing
+
+permissions:
+  pull-requests: write
+  id-token: write
+
+jobs:
+  check:
+    name: Block Manual PR to Release
+    runs-on: ubuntu-latest
+
+    steps:      
+      - name: Fail PR Check
+        shell: bash
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          echo
+          echo Invalid PR!
+          echo PRs targeting the release branch must be created by the GHA release workflow.
+          echo Current actor: \'$ACTOR\'
+          exit 1
+
+      - name: Close PR
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REF: ${{ github.ref }}
+        run: |
+          echo
+          echo Invalid PR!
+          echo PRs targeting the release branch must be created by the GHA release workflow.
+          echo Current actor: \'$ACTOR\'
