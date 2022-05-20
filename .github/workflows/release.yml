@@ -25,4 +25,4 @@ jobs:
       #   run: git push origin origin/main:ameter/test-release-clean # will change to release after testing
 
       - name: Create PR to push main to release branch
-        run: gh pr create --title "chore: kickoff rlease" --body "kickoff release" --head origin/main --base test-release-clean
+        run: "gh pr create --title 'chore: kickoff rlease' --body 'kickoff release' --head origin/main --base test-release-clean"
