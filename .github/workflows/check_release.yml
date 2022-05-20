@@ -45,7 +45,7 @@ jobs:
         shell: bash
         env:
           ACTOR: ${{ github.actor }}
-          EXPECTED: "blah"
+          EXPECTED: "testing"
         if: ${{ env.ACTOR != env.EXPECTED }}
         run: |
           echo
