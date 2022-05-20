@@ -1,5 +1,4 @@
 # Check PRs targeting the release brach to ensure they are from the release GHA workflow.
-
 name: Check release PR
 
 on:
@@ -11,43 +10,45 @@ permissions: {}
 
 jobs:
   check:
-    name: Run validation checks
+    name: Run Validation Checks
     runs-on: ubuntu-latest
 
     steps:
-      - name: Verify head ref is 'main'
+      - name: Validate Head Ref
         shell: bash
         env:
           HEAD_REF: ${{ github.head_ref }}
-        if: ${{ env.HEAD_REF != 'chore/gha-release-pr-check' }} # will change to main after testing
+          EXPECTED: "main"
+        if: ${{ env.HEAD_REF != env.EXPECTED }}
         run: |
           echo
           echo Invalid head ref!
-          echo PRs targeting the release branch must have a head ref of 'main'.
+          echo PRs targeting the release branch must have head ref: \'$EXPECTED\'
           echo Current head ref: \'$GITHUB_HEAD_REF\'
+          exit 1
 
-      - name: "Verify title is 'chore: kickoff release'" 
+      - name: Validate Title
         shell: bash
         env:
           TITLE: ${{ github.event.pull_request.title }}
-        if: ${{ env.TITLE != 'testing' }} # will change to 'chore: kickoff release'
+          EXPECTED: "chore: kickoff release"
+        if: ${{ env.TITLE != env.EXPECTED }}
         run: |
           echo
           echo Invalid title!
-          echo PRs targeting the release branch must have the title 'chore: kickoff rlease'
+          echo PRs targeting the release branch must have the title: \'$EXPECTED\'
           echo Current title: \'$TITLE\'
+          exit 1
       
-      - name: "Verify actor is '?'" 
+      - name: Validate Actor 
         shell: bash
         env:
           ACTOR: ${{ github.actor }}
-        if: ${{ env.ACTOR != 'ameter' }} # will change to '?'
+          EXPECTED: "chore: kickoff release"
+        if: ${{ env.ACTOR != 'blah' }} # change this
         run: |
           echo
           echo Invalid actor!
           echo PRs targeting the release branch must have the actor '?'
           echo Current actor: \'$ACTOR\'
-
-#TODO
-# change values
-# add exit 1s
+          exit 1
