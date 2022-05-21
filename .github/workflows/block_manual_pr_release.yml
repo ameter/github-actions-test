@@ -25,14 +25,11 @@ jobs:
           echo Invalid PR!
           echo PRs targeting the release branch must be created by the GHA release workflow.
           echo Current actor: \'$ACTOR\'
+          exit 1
 
       - name: Close PR
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REF: ${{ github.ref }}
-        run: |
-          echo
-          echo Invalid PR!
-          echo PRs targeting the release branch must be created by the GHA release workflow.
-          echo Current actor: \'$ACTOR\'
+        run: gh pr close $REF
