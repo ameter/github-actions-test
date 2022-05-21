@@ -7,7 +7,7 @@ on:
       - ameter/test-release-clean  # will change to release after testing
 
 permissions:
-  pull-requests: write
+  #pull-requests: write
 
 jobs:
   check:
