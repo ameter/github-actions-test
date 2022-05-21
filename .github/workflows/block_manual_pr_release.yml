@@ -6,7 +6,7 @@ on:
     branches:
       - ameter/test-release-clean  # will change to release after testing
 
-permissions:
+permissions: {}
   #pull-requests: write
 
 jobs:
