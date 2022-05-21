@@ -26,4 +26,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.title }}
         run: |
-          gh pr close $PR_NUMBER --comment "Invalid PR!\nPRs targeting the release branch must be created by the GHA release workflow."
+          gh pr close $PR_NUMBER --comment "Invalid PR! PRs targeting the release branch must be created by the GHA release workflow."
