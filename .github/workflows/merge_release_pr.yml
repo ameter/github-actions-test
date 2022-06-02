@@ -1,0 +1,26 @@
+name: Merge Release PR
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+    branches:
+      - release
+
+permissions: {}
+
+jobs:
+  check:
+    name: Merge PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate PR and Merge
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          TITLE: ${{ github.event.pull_request.title }}
+          EXPECTED_HEAD: "main"
+          EXPECTED_TITLE: "chore: kickoff release"
+        if: ${{ env.HEAD_REF == env.EXPECTED_HEAD && env.TITLE == env.EXPECTED_TITLE && github.event.review.state == 'approved' }}
+        run: "gh pr merge $PR_URL --merge --subject 'chore: kickoff release' --body ''"
