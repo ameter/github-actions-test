@@ -19,5 +19,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          "PR_URL=$(gh pr create --title 'chore: kickoff release' --body 'kickoff release' --head main --base release)"
+          echo "PR_URL=$(gh pr create --title 'chore: kickoff release' --body 'kickoff release' --head main --base release)"
           "gh pr merge $PR_URL --auto --merge --subject 'chore: kickoff release' --body ''"
