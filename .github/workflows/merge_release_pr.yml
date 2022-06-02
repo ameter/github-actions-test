@@ -7,8 +7,8 @@ on:
     branches:
       - release
 
-# permissions:
-#   pull-requests: write
+permissions:
+  contents: write
 
 jobs:
   check:
