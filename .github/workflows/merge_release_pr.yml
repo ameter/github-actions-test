@@ -18,6 +18,7 @@ jobs:
       - name: Validate PR and Merge
         shell: bash
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HEAD_REF: ${{ github.head_ref }}
           TITLE: ${{ github.event.pull_request.title }}
           EXPECTED_HEAD: "main"
