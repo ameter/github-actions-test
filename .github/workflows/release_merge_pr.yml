@@ -16,12 +16,13 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BASE_REF: ${{ github.event.pull_request.base.ref }}
-      HEAD_REF: ${{ github.pull_request.event.head.ref }}
+      HEAD_REF: ${{ github.event.pull_request.event.head.ref }}
       TITLE: ${{ github.event.pull_request.title }}
       PR: ${{ github.event.pull_request.number }}
       EXPECTED_BASE: "release"
       EXPECTED_HEAD: "main"
       EXPECTED_TITLE: "chore: kickoff release"
+    if: ${{ github.event.review.state == 'approved' }} && ${{ env.BASE_REF == env.EXPECTED_BASE }} && ${{ env.HEAD_REF == env.EXPECTED_HEAD }} && ${{ env.TITLE == env.EXPECTED_TITLE }}
 
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
