@@ -42,7 +42,7 @@ jobs:
           echo HEAD_REF: $HEAD_REF
           echo TITLE: $TITLE
           echo PR: $PR
-          EXPECTED_BASE: $EXPECTED_BASE
+          echo EXPECTED_BASE: $EXPECTED_BASE
           echo EXPECTED_HEAD: $EXPECTED_HEAD
           echo EXPECTED_TITLE: $EXPECTED_TITLE
 
