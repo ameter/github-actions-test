@@ -22,8 +22,8 @@ jobs:
       EXPECTED_BASE: "release"
       EXPECTED_HEAD: "main"
       EXPECTED_TITLE: "chore: kickoff release"
-    if: "${{ github.event.pull_request.base.ref == 'release' && github.event.pull_request.event.head.ref == 'main' && github.event.pull_request.title == 'chore: kickoff release' && github.event.review.state == 'approved' }}"
-
+    if: ${{ github.event.pull_request.base.ref == 'release' && github.event.pull_request.event.head.ref == 'main' && github.event.pull_request.title == 'chore: kickoff release' && github.event.review.state == 'approved' }}
+    
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
 
