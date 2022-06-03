@@ -1,4 +1,4 @@
-# Merges Release PRs 
+# Validates and merges release PRs after they have been approved. 
 name: Merge Release PR
 
 on:
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   check:
-    name: Merge PR
+    name: Validate and Merge PR
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,22 +22,13 @@ jobs:
       EXPECTED_BASE: "release"
       EXPECTED_HEAD: "main"
       EXPECTED_TITLE: "chore: kickoff release"
-    if: ${{ github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main' }}
+    if: "${{ github.event.pull_request.base.ref == 'release' && github.event.pull_request.event.head.ref == 'main' && github.event.pull_request.title == 'chore: kickoff release' && github.event.review.state == 'approved' }}"
 
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
 
-      - name: Validate PR and Merge
+      - name: Merge PR
         shell: bash
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #   BASE_REF: ${{ github.event.pull_request.base.ref }}
-        #   HEAD_REF: ${{ github.pull_request.event.head.ref }}
-        #   TITLE: ${{ github.event.pull_request.title }}
-        #   PR: ${{ github.event.pull_request.number }}
-        #   EXPECTED_HEAD: "main"
-        #   EXPECTED_TITLE: "chore: kickoff release"
-        # if: ${{ github.event.review.state == 'approved' }} && ${{ env.HEAD_REF == env.EXPECTED_HEAD }} && ${{ env.TITLE == env.EXPECTED_TITLE }}
         run: | #"gh pr merge $PR --merge --subject 'chore: kickoff release' --body ''"
           echo BASE_REF: $BASE_REF
           echo HEAD_REF: $HEAD_REF
