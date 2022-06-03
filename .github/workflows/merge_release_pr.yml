@@ -1,3 +1,4 @@
+# Merges Release PRs 
 name: Merge Release PR
 
 on:
