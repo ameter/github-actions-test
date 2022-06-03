@@ -27,7 +27,7 @@ jobs:
           PR: ${{ github.event.pull_request.number }}
           EXPECTED_HEAD: "main"
           EXPECTED_TITLE: "chore: kickoff release"
-        if: ${{ github.event.review.state == 'approved' }}
+        if: ${{ github.event.review.state == 'approved' }} && ${{ env.HEAD_REF == env.EXPECTED_HEAD }} && ${{ env.TITLE == env.EXPECTED_TITLE }}
         run: "gh pr merge $PR --merge --subject 'chore: kickoff release' --body ''"
 
 # env.HEAD_REF == env.EXPECTED_HEAD && env.TITLE == env.EXPECTED_TITLE && 
