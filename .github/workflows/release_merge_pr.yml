@@ -16,11 +16,9 @@ jobs:
     if: "${{ github.event.pull_request.base.ref == 'release' && github.event.pull_request.head.ref == 'main' && github.event.pull_request.title == 'chore: kickoff release' && github.event.review.state == 'approved' }}"
     
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-
       - name: Merge PR
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR: ${{ github.event.pull_request.number }}
-        run: "gh pr merge $PR --merge --subject 'chore: kickoff release' --body ''"
+        run: "gh pr merge $PR --repo ameter/github-actions-test --merge --subject 'chore: kickoff release' --body ''"
