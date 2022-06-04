@@ -3,6 +3,7 @@ name: "CodeQL config"
 queries: 
   - uses: security-and-quality
   - uses: security-extended
+  - uses: github/codeql/javascript/ql/src/Security/CWE-094/CodeInjection.ql@3a20ca96c4e378a4384fabfe6f551de588f6f93e
   # - uses: github/codeql/javascript/ql/src/Security/CWE-094@6cfd790cda9eb90089acf7311259bfdb8cb7d22b
   # - uses: github/codeql/javascript/ql/src/experimental/Security@413c0a8f4f180370afee977d286b68e27bda21e5
 
