@@ -12,16 +12,7 @@ permissions:
 jobs:
   check:
     name: Validate and Merge PR
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      BASE_REF: ${{ github.event.pull_request.base.ref }}
-      HEAD_REF: ${{ github.event.pull_request.head.ref }}
-      TITLE: ${{ github.event.pull_request.title }}
-      PR: ${{ github.event.pull_request.number }}
-      EXPECTED_BASE: "release"
-      EXPECTED_HEAD: "main"
-      EXPECTED_TITLE: "chore: kickoff release"
+    runs-on: ubuntu-latest      
     if: "${{ github.event.pull_request.base.ref == 'release' && github.event.pull_request.head.ref == 'main' && github.event.pull_request.title == 'chore: kickoff release' && github.event.review.state == 'approved' }}"
     
     steps:
@@ -29,13 +20,7 @@ jobs:
 
       - name: Merge PR
         shell: bash
-        run: | #"gh pr merge $PR --merge --subject 'chore: kickoff release' --body ''"
-          echo BASE_REF: $BASE_REF
-          echo HEAD_REF: $HEAD_REF
-          echo TITLE: $TITLE
-          echo PR: $PR
-          echo EXPECTED_BASE: $EXPECTED_BASE
-          echo EXPECTED_HEAD: $EXPECTED_HEAD
-          echo EXPECTED_TITLE: $EXPECTED_TITLE
-          echo ${{ github.event.review.state }}
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+        run: "gh pr merge $PR --merge --subject 'chore: kickoff release' --body ''"
