@@ -1,10 +1,10 @@
 name: "CodeQL config"
 
 queries: 
-  - uses: security-and-quality
-  - uses: security-extended
+  # - uses: security-and-quality
+  # - uses: security-extended
   # - uses: ./.github/codeql/queries/CodeInjection.ql
-  # - uses: ./.github/codeql/queries/ExpressionInjection.ql
+  - uses: ./.github/codeql/queries/ExpressionInjection.ql
   # - uses: ./.github/codeql/queries/ImproperCodeSanitization.ql
   # - uses: ./.github/codeql/queries/UnsafeCodeConstruction.ql
   
