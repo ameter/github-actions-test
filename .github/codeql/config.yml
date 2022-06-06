@@ -2,7 +2,7 @@ name: "CodeQL config"
 
 queries: 
   # - uses: ./.github/codeql/queries/javascript/ql/src/Security/CWE-094/ExpressionInjection.ql
-  - uses: github/codeql/javascript/ql/src/Security/CWE-094/ExpressionInjection.ql
+  - uses: github/codeql/javascript/ql/src/Security/CWE-094/ExpressionInjection.ql@v2.9.3
 
 paths:
   - .github
