@@ -5,7 +5,8 @@ queries:
   # - uses: security-extended
   # - uses: ./.github/codeql/queries/CodeInjection.ql
   # - uses: ./.github/codeql/queries/ExpressionInjection.ql
-  - uses: ./.github/codeql/src/Security/CWE-094/ExpressionInjection.ql
+  # - uses: ./.github/codeql/src/Security/CWE-094/ExpressionInjection.ql
+  - uses: ./.github/codeql/queries/javascript/ql/src/Security/CWE-094/ExpressionInjection.ql
   # - uses: ./.github/codeql/queries/ImproperCodeSanitization.ql
   # - uses: ./.github/codeql/queries/UnsafeCodeConstruction.ql
   
