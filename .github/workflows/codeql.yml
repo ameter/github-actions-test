@@ -4,9 +4,12 @@ on:
   push:
     branches: 
       - main
+      - dev-preview
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ main ]
+    branches:
+      - main
+      - dev-preview
   schedule:
     #        ┌───────────── minute (0 - 59)
     #        │  ┌───────────── hour (0 - 23)
@@ -30,21 +33,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ['javascript', 'ruby']
+        language: ['javascript']
         # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
         # Learn more about CodeQL language support at https://git.io/codeql-language-support
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
+      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@cdf3c9d01ea4271265ccbc19e40da0956d2ad492
+      uses: github/codeql-action/init@822fe5ef9a15bd752ef127e9ff6eac38ec37dd9c
       with:
         languages: ${{ matrix.language }}
         config-file: ./.github/codeql/config.yml
-        # debug: true
+        debug: true
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@cdf3c9d01ea4271265ccbc19e40da0956d2ad492
+      uses: github/codeql-action/analyze@822fe5ef9a15bd752ef127e9ff6eac38ec37dd9c
+

@@ -1,8 +1,10 @@
 name: "CodeQL config"
 
 queries: 
-  - uses: security-and-quality
-  - uses: github/codeql/javascript/ql/src/experimental/Security@413c0a8f4f180370afee977d286b68e27bda21e5
+  # - uses: security-and-quality
+  - uses: github/codeql/javascript/ql/src/Security/CWE-094/ExpressionInjection.ql@8cd261af0ed7edb7cd6b8ea6a0ffd99033b79783
+  # The following line will need to be changed if/when GitHub move UntrustedCheckout out of experimental
+  - uses: github/codeql/javascript/ql/src/experimental/Security/CWE-094/UntrustedCheckout.ql@8cd261af0ed7edb7cd6b8ea6a0ffd99033b79783
 
 paths:
   - .github
