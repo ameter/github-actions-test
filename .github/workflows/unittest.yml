@@ -1,11 +1,9 @@
-name: Unit Tests 
+name: Unit Tests
 on: 
   pull_request: 
     branches:      
       - main      
       - dev-preview
-
-runs-on: macos-12
 
 permissions:
     contents: read 
@@ -17,6 +15,7 @@ concurrency:
 jobs:
 
   amplify-unit-test:
+    runs-on: macos-latest
     environment: UnitTest
     steps:
       - uses: actions/checkout@v2
@@ -26,6 +25,7 @@ jobs:
           scheme: Amplify
 
   api-unit-test:
+    runs-on: macos-latest
     environment: UnitTest
     steps:
       - uses: actions/checkout@v2
@@ -35,6 +35,7 @@ jobs:
           scheme: AWSAPIPlugin  
 
   auth-unit-test:
+    runs-on: macos-latest
     environment: UnitTest
     steps:
       - uses: actions/checkout@v2
@@ -44,6 +45,7 @@ jobs:
           scheme: AWSCognitoAuthPlugin
 
   datastore-unit-test:
+    runs-on: macos-latest
     environment: UnitTest
     steps:
       - uses: actions/checkout@v2
@@ -53,6 +55,7 @@ jobs:
           scheme: AWSDataStorePlugin
   
   storage-unit-test:
+    runs-on: macos-latest
     environment: UnitTest
     steps:
       - uses: actions/checkout@v2
