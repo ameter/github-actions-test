@@ -41,6 +41,7 @@ jobs:
         uses: ./.github/composite_actions/run_xcodebuild_test
         with:
           scheme: Amplify
+          project_path: .
 
   # api-unit-test:
   #   runs-on: macos-latest
