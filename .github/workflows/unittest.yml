@@ -25,7 +25,7 @@ env:
 jobs:
 
   amplify-unit-test:
-    runs-on: macos-latest
+    runs-on: macos-12
     environment: UnitTest
     strategy:
       matrix:
