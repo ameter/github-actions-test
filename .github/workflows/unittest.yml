@@ -28,12 +28,12 @@ jobs:
     runs-on: macos-latest
     environment: UnitTest
     strategy:
-    matrix:
-      include:
-        - xcode: "13.4.1"
-          ios: "13.0"
-        - xcode: "14.0"
-          ios: "16.0"
+      matrix:
+        include:
+          - xcode: "13.4.1"
+            ios: "13.0"
+          - xcode: "14.0"
+            ios: "16.0"
     name: Amplify - iOS (${{ matrix.ios }})
     steps:
       - uses: actions/checkout@v2
