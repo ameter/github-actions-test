@@ -4,6 +4,9 @@ on:
     branches:      
       - main      
       - dev-preview
+  push:
+    branches:
+      - main
 
 permissions:
     contents: read 
@@ -12,11 +15,26 @@ concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
+env:
+  xcode_min: 13.4.1
+  xcode_max: 14.0
+  ios_min: 13.0
+  ios_max: 16.0
+  runner: macos-12
+
 jobs:
 
   amplify-unit-test:
     runs-on: macos-latest
     environment: UnitTest
+    strategy:
+    matrix:
+      include:
+        - xcode: "13.4.1"
+          ios: "13.0"
+        - xcode: "14.0"
+          ios: "16.0"
+    name: Amplify - iOS (${{ matrix.ios }})
     steps:
       - uses: actions/checkout@v2
       - name: Run unit test
@@ -24,43 +42,43 @@ jobs:
         with:
           scheme: Amplify
 
-  api-unit-test:
-    runs-on: macos-latest
-    environment: UnitTest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run unit test
-        uses: ./.github/composite_actions/run_xcodebuild_test
-        with:
-          scheme: AWSAPIPlugin  
+  # api-unit-test:
+  #   runs-on: macos-latest
+  #   environment: UnitTest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Run unit test
+  #       uses: ./.github/composite_actions/run_xcodebuild_test
+  #       with:
+  #         scheme: AWSAPIPlugin  
 
-  auth-unit-test:
-    runs-on: macos-latest
-    environment: UnitTest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run unit test
-        uses: ./.github/composite_actions/run_xcodebuild_test
-        with:
-          scheme: AWSCognitoAuthPlugin
+  # auth-unit-test:
+  #   runs-on: macos-latest
+  #   environment: UnitTest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Run unit test
+  #       uses: ./.github/composite_actions/run_xcodebuild_test
+  #       with:
+  #         scheme: AWSCognitoAuthPlugin
 
-  datastore-unit-test:
-    runs-on: macos-latest
-    environment: UnitTest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run unit test
-        uses: ./.github/composite_actions/run_xcodebuild_test
-        with:
-          scheme: AWSDataStorePlugin
+  # datastore-unit-test:
+  #   runs-on: macos-latest
+  #   environment: UnitTest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Run unit test
+  #       uses: ./.github/composite_actions/run_xcodebuild_test
+  #       with:
+  #         scheme: AWSDataStorePlugin
   
-  storage-unit-test:
-    runs-on: macos-latest
-    environment: UnitTest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run unit test
-        uses: ./.github/composite_actions/run_xcodebuild_test
-        with:
-          scheme: AWSS3StoragePlugin  
+  # storage-unit-test:
+  #   runs-on: macos-latest
+  #   environment: UnitTest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Run unit test
+  #       uses: ./.github/composite_actions/run_xcodebuild_test
+  #       with:
+  #         scheme: AWSS3StoragePlugin  
     

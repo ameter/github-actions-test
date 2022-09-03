@@ -1,17 +1,14 @@
 name: 'Run xcodebuild test'
-description: 'Action runs the tests specified at project_path for workspace and scheme'
+description: 'Action runs tests with the given Xcode version, scheme, and destination'
 
 inputs:
-  project_path:
-    required: true
-    type: string
-  workspace:
-    required: true
-    type: string
   scheme:
     required: true
     type: string
-  simulator:
+  project_path:
+    required: false
+    type: string
+  destination:
     required: false
     type: string
     default: 'platform=iOS Simulator,name=iPhone 13,OS=latest'
@@ -20,6 +17,11 @@ runs:
   using: "composite"
   steps:
     - name: Test ${{ inputs.scheme }}
+      env:
+        SCHEME: ${{ inputs.scheme }}
+        PROJECT_PATH: ${{ inputs.project_path }}
+        DESTINATION: ${{ inputs.destination }}
       run: |
-        xcodebuild test -scheme ${{ inputs.scheme }} -sdk iphonesimulator -destination '${{ inputs.simulator }}' | xcpretty --simple --color --report junit && exit ${PIPESTATUS[0]}        
+        cd $PROJECT_PATH
+        xcodebuild test -scheme $SCHEME -sdk iphonesimulator -destination $DESTINATION | xcpretty --simple --color --report junit && exit ${PIPESTATUS[0]}        
       shell: bash 
