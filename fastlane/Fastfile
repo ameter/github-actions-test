@@ -78,17 +78,16 @@ platform :ios do
   private_lane :release_commit do |options|
     next_version = options[:version]
 
-    sh('git', 'config', 'user.email', 'aws-amplify-bot')
-    sh('git', 'config', 'user.name', 'aws@amazon.com')
+    sh('git', 'config', '--global', 'user.email', ENV['GITHUB_EMAIL'])
+    sh('git', 'config', '--global', 'user.name', ENV['GITHUB_USER'])
 
     commit_message = "chore: release #{next_version} [skip ci]"
     sh('git', 'commit', '-am', commit_message)
 
     # push to origin
-    sh('git', 'push', '--force', 'origin', 'HEAD:release')
+    sh('git', 'push', 'origin', 'release')
   end
   
-
   desc "Tag in git and push to GitHub"
   private_lane :add_tag do |options|
     next_version = options[:version]
@@ -100,29 +99,28 @@ platform :ios do
 
   desc "Release pods"
   private_lane :release_pods do
-    
-    # AmplifyPods.pods.each do |pod|
-    #   if pod[:no_push]
-    #     UI.message "Skipping pushing pod #{pod[:spec]}"
-    #     next
-    #   end
+    AmplifyPods.pods.each do |pod|
+      if pod[:no_push]
+        UI.message "Skipping pushing pod #{pod[:spec]}"
+        next
+      end
 
-    #   UI.message "Pushing pod #{pod[:spec]}"
+      UI.message "Pushing pod #{pod[:spec]}"
 
-    #   with_retry do
-    #     begin
-    #       pod_push(path: pod[:spec], allow_warnings: true, synchronous: true)
-    #     rescue StandardError => e
-    #       raise e unless e.message =~ /Unable to accept duplicate entry/i
-    #       UI.important("Version already exists. Ignoring")
-    #     end
-    #   end
+      with_retry do
+        begin
+          pod_push(path: pod[:spec], allow_warnings: true, synchronous: true)
+        rescue StandardError => e
+          raise e unless e.message =~ /Unable to accept duplicate entry/i
+          UI.important("Version already exists. Ignoring")
+        end
+      end
 
-    #   unless pod == AmplifyPods.pods.last
-    #     # This shouldn't be necessary... but it is
-    #     sh('bundle', 'exec', 'pod', 'repo', 'update')
-    #   end
-    # end
+      unless pod == AmplifyPods.pods.last
+        # This shouldn't be necessary... but it is
+        sh('bundle', 'exec', 'pod', 'repo', 'update')
+      end
+    end
   end
 
   desc "Post-release"
@@ -130,9 +128,8 @@ platform :ios do
     version = options[:version].to_s
     changelog = options[:changelog]
     tag = "v#{version}"
-
-    plugin_root = File.expand_path("#{ENV['GITHUB_WORKSPACE']}/AmplifyPlugins")
-
+    plugin_root = File.expand_path("#{ENV['CIRCLE_WORKING_DIRECTORY']}/AmplifyPlugins")
+  
     sh('bundle', 'exec', 'swift', 'package', 'update')
 
     sh('bundle', 'exec', 'pod', 'repo', 'update')
@@ -152,8 +149,8 @@ platform :ios do
     push_git_tags(tag: tag, force: true)
 
     # push to origin
-    sh('git', 'push', '--force', 'origin', 'HEAD:release')
-    sh('git', 'push', 'origin', 'main')
+    sh('git', 'push', 'origin', 'release')
+    sh('git', 'push', 'origin', 'release:main')
   end
 end
 
