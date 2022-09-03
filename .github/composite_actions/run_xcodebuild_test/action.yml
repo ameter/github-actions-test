@@ -1,5 +1,5 @@
 name: 'Run xcodebuild test'
-description: 'Action runs tests with the given Xcode version, scheme, and destination'
+description: 'Action runs the test for the scheme specified'
 
 inputs:
   scheme:
@@ -12,6 +12,10 @@ inputs:
     required: false
     type: string
     default: 'platform=iOS Simulator,name=iPhone 13,OS=latest'
+  xcode:
+    required: false
+    type: string
+    default: '13.4.1'
 
 runs:
   using: "composite"
